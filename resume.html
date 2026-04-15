@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Humaun Kabir | PHP Laravel & React Developer</title>
+
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 18mm;
+        }
+
+        body {
+            margin: 0;
+            background: #e5e5e5;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background: #fff;
+            margin: 15px auto;
+            padding: 10mm;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+        }
+
+        /* PDF Button */
+        .pdf-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 6px 14px;
+            font-size: 12px;
+            background: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .pdf-btn:hover {
+            background: #333;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 14px;
+        }
+
+        .photo-wrapper {
+            width: 100px;
+            height: 120px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 0.8px;
+        }
+
+        .title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .contact {
+            font-size: 13px;
+            margin-top: 4px;
+            line-height: 1.35;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 13px;
+            margin-bottom: 4px;
+            border-bottom: 1.5px solid #000;
+            padding-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 3px 0;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+
+        ul {
+            margin: 3px 0 6px 0px;
+            font-size: 13px;
+            padding-inline-start: 35px;
+        }
+
+        li {
+            margin-bottom: 2px;
+        }
+
+        /* Skills */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .skill {
+            background: #f2f2f2;
+            padding: 2px 6px;
+            font-size: 10.5px;
+            border-radius: 4px;
+        }
+
+        /* Experience */
+        .job-title {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .job-meta {
+            font-size: 12px;
+            color: #444;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Hide button in PDF */
+        @media print {
+            .pdf-btn {
+                display: none;
+            }
+
+            .page {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="pdf-btn" onclick="downloadPDF()">Download PDF</button>
+    <button class="pdf-btn" onclick="window.print()">ATS PDF</button>
+
+    <div class="page" id="resume">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="photo-wrapper" onclick="triggerPhotoUpload()">
+                <img id="photoPreview" style="display:none;">
+                <div class="photo-placeholder" id="photoText">Click to Upload Photo</div>
+                <input type="file" id="photoInput" accept="image/*">
+            </div>
+
+            <div>
+                <h1>Humaun Kabir</h1>
+                <div class="title">PHP Laravel & React Developer</div>
+                <div class="contact">
+                    humaunkabi85@gmail.com | 01798958469<br>
+                    Sajapur, Khansama, Dinajpur<br>
+                    github.com/humaun420 | linkedin.com/in/humaunkabir420
+                </div>
+            </div>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="section">
+            <h2>Professional Summary</h2>
+            <p>
+                PHP Laravel and React Developer with 3+ years of experience delivering scalable web applications,
+                RESTful APIs, and custom WordPress solutions. Strong focus on backend architecture, frontend
+                performance, and maintainable codebases.
+            </p>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="section">
+            <h2>Professional Experience</h2>
+
+            <div class="job-title">Junior Software Engineer</div>
+            <div class="job-meta">
+                IT Analyzer — Rangpur | Aug 2022 – Nov 2023
+            </div>
+
+            <ul>
+                <li>Developed custom WordPress themes and implemented backend logic using PHP.</li>
+                <li>Built and customized dynamic layouts using Elementor and WPBakery.</li>
+                <li>Extended functionality through plugin customization and feature enhancements.</li>
+                <li>Integrated WooCommerce, payment gateways, and optimized performance and SEO.</li>
+            </ul>
+
+            <div class="job-title">Associate Software Engineer</div>
+            <div class="job-meta">
+                Nexoda.io — Dhaka | Dec 2023 – Present
+            </div>
+
+            <ul>
+                <li>Developed and maintained Laravel-based applications and RESTful APIs.</li>
+                <li>Built frontend interfaces using React, Blade, and Tailwind CSS.</li>
+                <li>Implemented API integrations, feature enhancements, and performance fixes.</li>
+                <li>Collaborated with cross-functional teams using Git workflows.</li>
+            </ul>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="section">
+            <h2>Technical Skills</h2>
+
+            <p><strong>Backend:</strong> PHP, Laravel, REST API, MVC Architecture, MySQL, PostgreSQL</p>
+            <p><strong>Frontend:</strong> React, JavaScript, TypeScript, jQuery, Blade, HTML5, CSS3, Tailwind, Bootstrap
+            </p>
+            <p><strong>CMS:</strong> WordPress, WooCommerce, Custom Themes, Plugin Development, WP REST API</p>
+            <p><strong>Tools & DevOps:</strong> Git, Linux, Postman, Swagger</p>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="section">
+            <h2>Key Projects</h2>
+
+            <p><strong>Email Validation Checker</strong> — Laravel, Blade, Bootstrap</p>
+            <ul>
+                <li>Developed email validation workflows including format and logic checks.</li>
+                <li>Implemented bulk email sending functionality with processing controls.</li>
+                <li>Built a frontend dashboard to manage validation results and email tasks.</li>
+                <li>Optimized backend logic for performance and accuracy.</li>
+            </ul>
+
+            <p><strong><a href="https://sendcoop.com/" style="color: #000;">Sendcoop Email Automation
+                        Platform</a></strong> — Laravel, Blade,
+                Bootstrap, CSS</p>
+            <ul>
+                <li>Designed and developed a customer-facing dashboard for managing email campaigns and automation
+                    workflows.</li>
+                <li>Implemented application features and enhancements related to campaign management and user
+                    operations.</li>
+                <li>Built a separate public-facing website including landing pages and informational content for
+                    visitors.</li>
+                <li>Developed an independent content management dashboard to manage website pages and content.</li>
+                <li>Maintained clear separation between the public website and the secured application dashboard.</li>
+            </ul>
+
+            <!-- <p><strong>Texon HRM System</strong> — Laravel, React, Tailwind</p>
+            <ul>
+                <li>Developed backend modules and RESTful APIs.</li>
+                <li>Built attendance module with biometric device integration, along with roster, leave, and payroll
+                    features.</li>
+                <li>Optimized attendance processing logic for accuracy and performance.</li>
+            </ul> -->
+
+            <p><strong>BestaFasta Restaurant Management System</strong> — Laravel, React, Tailwind, Reverb</p>
+            <ul>
+                <li>Delivered full-stack solution with real-time functionality.</li>
+                <li>Built real-time order tracking and kitchen display using Reverb.</li>
+                <li>Implemented multi-branch support with role-based access control.</li>
+                <li>Integrated secure payment gateway processing for online and in-store transactions.</li>
+            </ul>
+
+            <p><strong>WordPress Business & Event Websites</strong> — WordPress, WooCommerce, WPBakery, Elementor</p>
+            <ul>
+                <li>Complete setup, customization, and performance optimization.</li>
+                <li>Developed custom WordPress themes and built custom Elementor widgets.</li>
+            </ul>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section">
+            <h2>Education</h2>
+            <p style="display: flex; justify-content: space-between;"> <strong>Northern University Bangladesh</strong>
+                <span style="display: inline-block; margin-left: auto;">(2024 - 2028)</span>
+            </p>
+            <p style="display: flex; justify-content: space-between;">Bachelor of Science in Computer Science and
+                Engineering (Ongoing)</p>
+
+
+            <p style="display: flex; justify-content: space-between;"> <strong>Rangpur Ideal Institute of
+                    Technology</strong> <span style="display: inline-block; margin-left: auto;">(2020 - 2023)</span>
+            </p>
+            <p style="display: flex; justify-content: space-between;">Diploma in Computer Science and Technology <span
+                    style="display: inline-block; margin-left: auto;">(CGPA 3.3)</span></p>
+            <!-- <p>
+                <strong>SSC (Science)</strong> — Paschim Basuli High School (2019–2020)
+            </p> -->
+        </div>
+
+        <!-- ADDITIONAL -->
+        <!-- <div class="section">
+            <h2>Additional</h2>
+            <p>Freelancing Experience: 1 Year | Languages: Bengali (Native), English, Urdu</p>
+        </div> -->
+
+        <!-- <div class="footer">
+            © Humaun Kabir — Software Developer
+        </div> -->
+
+    </div>
+
+    <script>
+        function triggerPhotoUpload() {
+            document.getElementById('photoInput').click();
+        }
+
+        document.getElementById('photoInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.getElementById('photoPreview');
+                img.src = event.target.result;
+                img.style.display = 'block';
+                document.getElementById('photoText').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function downloadPDF() {
+            const element = document.getElementById('resume');
+            html2pdf().set({
+                margin: 0,
+                filename: 'Humaun_Kabir_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save();
+        }
+    </script>
+
+</body>
+
+</html>
